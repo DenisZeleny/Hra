@@ -51,6 +51,10 @@ public class GameFrame extends JPanel {
 
         if (Camera < 0) Camera = 0;
 
+        tileSet.update();
+
+
+
 
 
 

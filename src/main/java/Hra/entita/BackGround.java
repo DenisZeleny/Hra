@@ -8,10 +8,7 @@ public class BackGround extends Entita{
     Image backGround = new ImageIcon("src/main/resources/background3.png").getImage();
 
 
-    int x;
-    int y;
-    int width;
-    int height;
+
 
     public BackGround(int x, int y, int width, int height) {
         super(x, y, width, height, true);
