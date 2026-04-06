@@ -24,7 +24,7 @@ public class MenuPanel extends JPanel {
         gbc.gridx = 0;
 
 
-        JLabel title = new JLabel("O B L A K");
+        JLabel title = new JLabel("MARIO Z TEMU");
         title.setFont(new Font("Monospaced", Font.BOLD, 70));
         title.setForeground(Color.white);
 

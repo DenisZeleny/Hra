@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.awt.Rectangle;
+import Hra.entita.MapaManager;
 
 public class TileSet {
 
@@ -13,11 +15,10 @@ public class TileSet {
     private final Image TILE_1;
     private final Image TILE_2;
     private final Image TILE_3;
-
     public Coin animatedCoin = new Coin();
 
 
-    private final int[][] mapa = {
+    final int[][] mapa = {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -49,31 +50,34 @@ public class TileSet {
         animatedCoin.update();
     }
 
-    public void drawTile(Graphics g) {
+
+
+
+    public void drawTile(Graphics g, MapaManager mm) {
         for (int i = 0; i < mapa.length; i++) {
             for (int j = 0; j < mapa[i].length; j++) {
                 int tileId = mapa[i][j];
 
-                if (tileId == 4) {
-                    animatedCoin.drawCoin(g, j * 64, i * 64);
-                } else {
-
+                if (tileId >= 1 && tileId <= 3) {
                     Image tile = getTileImage(tileId);
                     if (tile != null) {
-                        g.drawImage(tile, j * 64, i * 64, TILE_SIZE, TILE_SIZE, null);
+                        g.drawImage(tile, j * 64, i * 64, 64, 64, null);
                     }
                 }
             }
         }
-    }
-
-        public Image getTileImage(int tileId){
-            return switch (tileId) {
-                case 1 -> TILE_1;
-                case 2 -> TILE_2;
-                case 3 -> TILE_3;
-
-                default -> null;
-            };
+        for (Rectangle coinRect : mm.coins) {
+            animatedCoin.drawCoin(g, coinRect.x, coinRect.y);
         }
     }
+    public Image getTileImage(int tileId) {
+        return switch (tileId) {
+            case 1 -> TILE_1;
+            case 2 -> TILE_2;
+            case 3 -> TILE_3;
+            default -> null;
+        };
+    }
+
+
+}

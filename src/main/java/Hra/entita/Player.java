@@ -35,39 +35,62 @@ public class Player extends Entita {
         }
     }
 
-    public void ovladani(KeyInput keys) {
+    public void ovladani(KeyInput keys, MapaManager mm) {
+        int oldX = getX();
 
-        int podlahaY = 6 * 64 - getHeight();
 
         if (keys.isKeyPressed(KeyEvent.VK_D)) {
             setX(getX() + 5);
+            if (checkCollision(mm.grass)) setX(oldX);
             radek = 1;
             move();
-        } else if (keys.isKeyPressed(KeyEvent.VK_A)) {
+        }
+
+        else if (keys.isKeyPressed(KeyEvent.VK_A)) {
             setX(getX() - 5);
+            if (checkCollision(mm.grass)) setX(oldX);
             radek = 2;
             move();
         } else {
             sloupec = 0;
         }
 
-
-        if (keys.isKeyPressed(KeyEvent.VK_SPACE) && !jump && getY() >= podlahaY) {
+        if (keys.isKeyPressed(KeyEvent.VK_SPACE) && !jump && isOnGround(mm.grass)) {
             jump = true;
             JumpLenght = 20;
         }
-
         if (jump) {
             setY(getY() - 10);
+            if (checkCollision(mm.grass)) jump = false;
             JumpLenght--;
             if (JumpLenght <= 0) jump = false;
         } else {
-
-            if (getY() < podlahaY) {
-                setY(getY() + 8);
-                if (getY() > podlahaY) setY(podlahaY);
+            setY(getY() + 8);
+            if (checkCollision(mm.grass)) {
+                setY((getY() / 64) * 64);
             }
         }
+        for (int i = 0; i < mm.coins.size(); i++) {
+            if (this.getBounds().intersects(mm.coins.get(i))) {
+                mm.coins.remove(i);
+                break;
+            }
+        }
+    }
+
+    private boolean checkCollision(java.util.ArrayList<Rectangle> blocks) {
+        for (Rectangle r : blocks) {
+            if (this.getBounds().intersects(r)) return true;
+        }
+        return false;
+    }
+
+    private boolean isOnGround(java.util.ArrayList<Rectangle> blocks) {
+        Rectangle footSensor = new Rectangle(getX() + 5, getY() + getHeight(), getWidth() - 10, 2);
+        for (Rectangle r : blocks) {
+            if (footSensor.intersects(r)) return true;
+        }
+        return false;
     }
 
 

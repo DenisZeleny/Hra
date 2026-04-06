@@ -13,14 +13,11 @@ public class Coin  {
     private double timer = 0;
     private final double frameSpeed = 0.05;
 
-    private int x, y; // Pozice mince
-
-
+    private int x, y;
 
     public Coin() {
 
     }
-
 
     public void update() {
         timer += 0.016;
@@ -46,7 +43,7 @@ public class Coin  {
     private static Image[] loadFrames(String path, int width, int height, int count) {
         Image[] frames = new Image[count];
         try {
-            // Načte velký obrázek se všemi fázemi
+
             Image fullImage = new ImageIcon(Coin.class.getResource(path)).getImage();
             BufferedImage spriteSheet = new BufferedImage(
                     fullImage.getWidth(null), fullImage.getHeight(null), BufferedImage.TYPE_INT_ARGB
