@@ -40,14 +40,14 @@ public class Player extends Entita {
 
 
         if (keys.isKeyPressed(KeyEvent.VK_D)) {
-            setX(getX() + 5);
+            setX(getX() + 4);
             if (checkCollision(mm.grass)) setX(oldX);
             radek = 1;
             move();
         }
 
         else if (keys.isKeyPressed(KeyEvent.VK_A)) {
-            setX(getX() - 5);
+            setX(getX() - 4);
             if (checkCollision(mm.grass)) setX(oldX);
             radek = 2;
             move();
