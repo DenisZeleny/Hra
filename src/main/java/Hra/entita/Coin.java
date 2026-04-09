@@ -58,7 +58,7 @@ public class Coin  {
                 frames[i] = spriteSheet.getSubimage(i * width, 0, width, height);
             }
         } catch (Exception e) {
-            System.out.println("Chyba při načítání mince: " + e.getMessage());
+
         }
         return frames;
     }
