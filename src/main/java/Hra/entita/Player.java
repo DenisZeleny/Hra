@@ -3,13 +3,11 @@ package Hra.entita;
 import javax.swing.*;
 import java.awt.*;
 import Hra.entita.input.KeyInput;
-import Hra.entita.tools.CollisionTools;
-import Hra.entita.tools.PositionTools;
+
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 
 public class Player extends Entita {
-
+    private int coinsCollected = 0;
 
     Image Panak = new ImageIcon(getClass().getResource("/guy.png")).getImage();
 
@@ -24,6 +22,9 @@ public class Player extends Entita {
         super(x, y, width, height, isAlive);
     }
 
+    public void addCoin() {coinsCollected++;}
+    public int getCoinsCollected() { return coinsCollected; }
+
     public void move() {
         pauza++;
         if (pauza > 10) {
@@ -37,6 +38,7 @@ public class Player extends Entita {
 
     public void ovladani(KeyInput keys, MapaManager mm) {
         int oldX = getX();
+
 
 
         if (keys.isKeyPressed(KeyEvent.VK_D)) {
@@ -70,13 +72,10 @@ public class Player extends Entita {
                 setY((getY() / 64) * 64);
             }
         }
-        for (int i = 0; i < mm.coins.size(); i++) {
-            if (this.getBounds().intersects(mm.coins.get(i))) {
-                mm.coins.remove(i);
-                break;
-            }
-        }
+
+
     }
+
 
     private boolean checkCollision(java.util.ArrayList<Rectangle> blocks) {
         for (Rectangle r : blocks) {
@@ -115,3 +114,4 @@ public class Player extends Entita {
     }
 
 }
+

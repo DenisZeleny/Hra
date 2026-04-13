@@ -31,4 +31,21 @@ public class MapaManager {
             }
         }
     }
+    public void checkCoinCollection(Player player) {
+        for (int i = 0; i < coins.size(); i++) {
+            if (player.getBounds().intersects(coins.get(i))) {
+                coins.remove(i);
+                player.addCoin();
+                break;
+            }
+        }
+    }
+
+
+    public boolean isPlayerDead(Player player) {
+        for (Rectangle s : spikes) {
+            if (player.getBounds().intersects(s)) return true;
+        }
+        return player.getY() > 900;
+    }
 }

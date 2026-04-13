@@ -30,9 +30,6 @@ public class MenuPanel extends JPanel {
             Font customFont = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(90f);
             title.setFont(customFont);
         } catch (Exception e) {
-
-            title.setFont(new Font("Monospaced", Font.BOLD, 70));
-
         }
 
 
