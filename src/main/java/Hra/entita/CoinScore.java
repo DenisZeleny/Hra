@@ -1,6 +1,5 @@
 package Hra.entita;
 
-import java.awt.Graphics;
 import java.awt.*;
 import java.io.InputStream;
 

@@ -10,6 +10,7 @@ public class Game extends JFrame {
 
     private CardLayout layout;
     private JPanel container;
+    private MenuPanel menuPanel;
 
     public Game() {
         setTitle("Mario z Temu");
@@ -21,7 +22,7 @@ public class Game extends JFrame {
         container = new JPanel(layout);
 
         // Vytvoření menu a předání akce pro start
-        MenuPanel menuPanel = new MenuPanel(() -> {
+        this.menuPanel = new MenuPanel(() -> {
             startGame();
         });
 
@@ -32,22 +33,19 @@ public class Game extends JFrame {
     }
 
     private void startGame() {
-        // Vytvoření nové instance GameFrame pokaždé, když startujeme
-        // Předáváme Runnable (lambda výraz), který se spustí při výhře
+        // Teď posíláme 'menuPanel' jako druhý parametr
         GameFrame gameFrame = new GameFrame(() -> {
-            layout.show(container, CARD_MENU); // Přepne na menu
-            // Po návratu do menu můžeme herní panel odstranit, aby nezabíral paměť
-            container.remove(container.getComponent(1));
-            revalidate();
-            repaint();
-        });
+            layout.show(container, CARD_MENU);
+            container.remove(container.getComponent(1)); // Odstraní starou hru
+        }, menuPanel);
 
         container.add(gameFrame, CARD_GAME);
         layout.show(container, CARD_GAME);
-
         gameFrame.requestFocusInWindow();
         gameFrame.startGame();
     }
+
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {

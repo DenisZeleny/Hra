@@ -13,6 +13,13 @@ public class MenuPanel extends JPanel {
 
     private int width = 1200;
     private int height = 900;
+    private int ziskaneMince = -1;
+    private Font customFont2;
+
+    public void nastavKonec(int coins) {
+        this.ziskaneMince = coins;
+        repaint();
+    }
 
     public MenuPanel(Runnable onStart) {
         setLayout(new GridBagLayout());
@@ -29,8 +36,7 @@ public class MenuPanel extends JPanel {
             InputStream is = getClass().getResourceAsStream("/The Bomb Sound.ttf");
             Font customFont = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(90f);
             title.setFont(customFont);
-        } catch (Exception e) {
-        }
+        } catch (Exception e) {}
 
 
         title.setForeground(Color.white);
@@ -55,6 +61,14 @@ public class MenuPanel extends JPanel {
         gbc.gridy = 1;
         gbc.insets = new Insets(0, 0, 0, 0);
         add(startButton, gbc);
+
+
+        try {
+
+            InputStream is = getClass().getResourceAsStream("/The Bomb Sound.ttf");
+            this.customFont2 = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(30f);
+
+        } catch (Exception e) {}
     }
 
     @Override
@@ -64,5 +78,15 @@ public class MenuPanel extends JPanel {
         g.drawImage(space, 800, 450, 530, 350, null);
         g.drawImage(A, 890, 450, 250, 250, null);
         g.drawImage(D, 970, 455, 250, 250, null);
+
+
+
+
+        if (ziskaneMince >= 0) {
+            g.setFont(customFont2);
+            g.setColor(Color.YELLOW);
+
+            g.drawString("COINS COLLECTED: " + ziskaneMince, 470, 340);
+        }
+        }
     }
-}

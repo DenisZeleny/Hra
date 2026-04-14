@@ -1,7 +1,6 @@
 package Hra.entita;
 
 import Hra.entita.input.KeyInput;
-import Hra.entita.MapaManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,9 +18,12 @@ public class GameFrame extends JPanel {
     private Runnable onWin;
     private Timer timer;
     private int camera = 0;
+    private MenuPanel menuPanel;
 
-    public GameFrame(Runnable onWin) {
+    public GameFrame(Runnable onWin, MenuPanel menuPanel) {
         this.onWin = onWin;
+        this.menuPanel = menuPanel;
+
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
         addKeyListener(keyInput);
@@ -40,16 +42,19 @@ public class GameFrame extends JPanel {
         mapManager.checkCoinCollection(player);
 
         if (mapManager.isPlayerDead(player)) {
-            endGame();
+            endGame(-1);
+
             return;
         }
 
-        if (player.getX() > 9400) {
-            endGame();
+        if (player.getX() > 1700) {
+            endGame(player.getCoinsCollected());
+
             return;
         }
         if (player.getY() > 1200) {
-            endGame();
+            endGame(-1);
+
             return;
         }
 
@@ -61,7 +66,12 @@ public class GameFrame extends JPanel {
 
 
 
-private void endGame() {
+private void endGame(int coins) {
+
+    if (menuPanel != null) {
+
+        menuPanel.nastavKonec(coins); // Pošleme data do menu
+    }
     timer.stop();
     if (onWin != null) onWin.run();
 }
