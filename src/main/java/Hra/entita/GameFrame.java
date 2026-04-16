@@ -15,6 +15,7 @@ public class GameFrame extends JPanel {
     TileSet tileSet = new TileSet();
     MapaManager mapManager = new MapaManager();
     CoinScore coinScore = new CoinScore();
+    FinishFlag finishFlag = new FinishFlag(9000, 323,256,256);
     private Runnable onWin;
     private Timer timer;
     private int camera = 0;
@@ -42,19 +43,16 @@ public class GameFrame extends JPanel {
         mapManager.checkCoinCollection(player);
 
         if (mapManager.isPlayerDead(player)) {
-            endGame(-1);
-
+            endGame("YOU DIED!", -1);
             return;
         }
 
-        if (player.getX() > 9400) {
-            endGame(player.getCoinsCollected());
-
+        if (player.getX() > 9200) {
+            endGame("LEVEL COMPLETE!", player.getCoinsCollected());
             return;
         }
         if (player.getY() > 1200) {
-            endGame(-1);
-
+            endGame("YOU DIED!", -1);
             return;
         }
 
@@ -66,11 +64,11 @@ public class GameFrame extends JPanel {
 
 
 
-private void endGame(int coins) {
+private void endGame(String message, int coins) {
 
     if (menuPanel != null) {
 
-        menuPanel.nastavKonec(coins); // Pošleme data do menu
+        menuPanel.nastavKonec(message, coins);
     }
     timer.stop();
     if (onWin != null) onWin.run();
@@ -88,6 +86,7 @@ private void endGame(int coins) {
         backGround.draw(g2);
         tileSet.drawTile(g2, mapManager);
         player.draw(g2);
+        finishFlag.draw(g2);
 
 
 

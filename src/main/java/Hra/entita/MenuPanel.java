@@ -11,12 +11,15 @@ public class MenuPanel extends JPanel {
     private Image A = new ImageIcon("src/main/resources/a.png").getImage();
     private Image D = new ImageIcon("src/main/resources/D.png").getImage();
 
+
     private int width = 1200;
     private int height = 900;
+    private String statusText = "";
     private int ziskaneMince = -1;
     private Font customFont2;
 
-    public void nastavKonec(int coins) {
+    public void nastavKonec(String text, int coins) {
+        this.statusText = text;
         this.ziskaneMince = coins;
         repaint();
     }
@@ -64,10 +67,8 @@ public class MenuPanel extends JPanel {
 
 
         try {
-
             InputStream is = getClass().getResourceAsStream("/The Bomb Sound.ttf");
-            this.customFont2 = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(30f);
-
+            this.customFont2 = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(45f);
         } catch (Exception e) {}
     }
 
@@ -80,13 +81,24 @@ public class MenuPanel extends JPanel {
         g.drawImage(D, 970, 455, 250, 250, null);
 
 
+        if (!statusText.isEmpty()) {
+            if (statusText.contains("DIED")) {
+                g.setFont(customFont2);
+                g.setColor(Color.RED);
+                g.drawString(statusText, 500, 650);
+            } else {
+                g.setFont(customFont2);
+                g.setColor(Color.GREEN);
+                g.drawString(statusText, 425, 650);
 
+            }
 
         if (ziskaneMince >= 0) {
             g.setFont(customFont2);
             g.setColor(Color.YELLOW);
 
-            g.drawString("COINS COLLECTED: " + ziskaneMince, 470, 340);
+            g.drawString("COINS COLLECTED: " + ziskaneMince, 415, 350);
         }
         }
     }
+}
