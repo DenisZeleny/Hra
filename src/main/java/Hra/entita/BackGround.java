@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class BackGround extends Entita{
 
-    Image backGround = new ImageIcon("src/main/resources/background3.png").getImage();
+    Image backGround = new ImageIcon(getClass().getResource("/background3.png")).getImage();
 
 
 

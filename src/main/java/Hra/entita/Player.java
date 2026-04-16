@@ -11,9 +11,9 @@ public class Player extends Entita {
 
     Image Panak = new ImageIcon(getClass().getResource("/guy.png")).getImage();
 
-    int sloupec = 0;
-    int radek = 0;
-    int pauza = 0;
+    int frameX = 0;
+    int frameY = 0;
+    int frameDelay = 0;
     int JumpLenght = 0;
     boolean jump = false;
 
@@ -26,12 +26,12 @@ public class Player extends Entita {
     public int getCoinsCollected() { return coinsCollected; }
 
     public void move() {
-        pauza++;
-        if (pauza > 10) {
-            pauza = 0;
-            sloupec++;
-            if (sloupec > 3) {
-                sloupec = 0;
+        frameDelay++;
+        if (frameDelay > 10) {
+            frameDelay = 0;
+            frameX++;
+            if (frameX > 3) {
+                frameX = 0;
             }
         }
     }
@@ -44,17 +44,17 @@ public class Player extends Entita {
         if (keys.isKeyPressed(KeyEvent.VK_D)) {
             setX(getX() + 4);
             if (checkCollision(mm.grass)) setX(oldX);
-            radek = 1;
+            frameY = 1;
             move();
         }
 
         else if (keys.isKeyPressed(KeyEvent.VK_A)) {
             setX(getX() - 4);
             if (checkCollision(mm.grass)) setX(oldX);
-            radek = 2;
+            frameY = 2;
             move();
         } else {
-            sloupec = 0;
+            frameX = 0;
         }
 
         if (keys.isKeyPressed(KeyEvent.VK_SPACE) && !jump && isOnGround(mm.grass)) {
@@ -101,8 +101,8 @@ public class Player extends Entita {
 
 
 
-        int zdrojX1 = sloupec * sirkaJedne;
-        int zdrojY1 = radek * vyskaJedne;
+        int zdrojX1 = frameX * sirkaJedne;
+        int zdrojY1 = frameY * vyskaJedne;
         int zdrojX2 = zdrojX1 + sirkaJedne;
         int zdrojY2 = zdrojY1 + vyskaJedne;
 
