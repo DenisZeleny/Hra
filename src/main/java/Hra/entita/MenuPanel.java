@@ -110,7 +110,7 @@ public class MenuPanel extends JPanel {
             g.setFont(customFont2);
             g.setColor(Color.YELLOW);
 
-            g.drawString("COINS COLLECTED: " + ziskaneMince, 410, 350);
+            g.drawString("COINS COLLECTED: " + ziskaneMince, 403, 350);
         }
         }
     }
