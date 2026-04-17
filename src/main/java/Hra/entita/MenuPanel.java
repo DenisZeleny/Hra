@@ -17,6 +17,8 @@ public class MenuPanel extends JPanel {
     private String statusText = "";
     private int ziskaneMince = -1;
     private Font customFont2;
+    private Font customFont1;
+    private Font customFont3;
 
     public void nastavKonec(String text, int coins) {
         this.statusText = text;
@@ -37,8 +39,8 @@ public class MenuPanel extends JPanel {
         try {
 
             InputStream is = getClass().getResourceAsStream("/The Bomb Sound.ttf");
-            Font customFont = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(90f);
-            title.setFont(customFont);
+            this.customFont1 = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(90f);
+            title.setFont(customFont1);
         } catch (Exception e) {}
 
 
@@ -70,6 +72,12 @@ public class MenuPanel extends JPanel {
             InputStream is = getClass().getResourceAsStream("/The Bomb Sound.ttf");
             this.customFont2 = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(45f);
         } catch (Exception e) {}
+
+
+        try {
+            InputStream is = getClass().getResourceAsStream("/The Bomb Sound.ttf");
+            this.customFont3 = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(65f);
+        } catch (Exception e) {}
     }
 
     @Override
@@ -81,15 +89,20 @@ public class MenuPanel extends JPanel {
         g.drawImage(D, 970, 455, 250, 250, null);
 
 
+        g.setFont(customFont2);
+        g.setColor(Color.white);
+        g.drawString("MOVEMENT:",920,500);
+
+
         if (!statusText.isEmpty()) {
             if (statusText.contains("DIED")) {
-                g.setFont(customFont2);
+                g.setFont(customFont3);
                 g.setColor(Color.RED);
-                g.drawString(statusText, 500, 650);
+                g.drawString(statusText, 450, 650);
             } else {
-                g.setFont(customFont2);
+                g.setFont(customFont3);
                 g.setColor(Color.GREEN);
-                g.drawString(statusText, 425, 650);
+                g.drawString(statusText, 335, 650);
 
             }
 
@@ -97,7 +110,7 @@ public class MenuPanel extends JPanel {
             g.setFont(customFont2);
             g.setColor(Color.YELLOW);
 
-            g.drawString("COINS COLLECTED: " + ziskaneMince, 415, 350);
+            g.drawString("COINS COLLECTED: " + ziskaneMince, 410, 350);
         }
         }
     }

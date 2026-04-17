@@ -39,6 +39,7 @@ public class TileSet {
     public TileSet() {
 
 
+
         TILE_1 = new ImageIcon(Objects.requireNonNull(getClass().getResource("/grass.png"))).getImage();
         TILE_2 = new ImageIcon(Objects.requireNonNull(getClass().getResource("/hlina.png"))).getImage();
         TILE_3 = new ImageIcon(Objects.requireNonNull(getClass().getResource("/spike.png"))).getImage();
@@ -61,7 +62,7 @@ public class TileSet {
                 if (tileId >= 1 && tileId <= 3) {
                     Image tile = getTileImage(tileId);
                     if (tile != null) {
-                        g.drawImage(tile, j * 64, i * 64, 64, 64, null);
+                        g.drawImage(tile, j * TILE_SIZE, i * TILE_SIZE, TILE_SIZE, TILE_SIZE, null);
                     }
                 }
             }

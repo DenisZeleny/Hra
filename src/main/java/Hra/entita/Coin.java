@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Coin  {
+public class Coin extends Entita{
 
 
     private static final Image[] COIN_FRAMES = loadFrames("/coin64.png", 64, 64, 25);
@@ -13,10 +13,9 @@ public class Coin  {
     private double timer = 0;
     private final double frameSpeed = 0.05;
 
-    private int x, y;
 
     public Coin() {
-
+        super(0, 0, 64, 64, true);
     }
 
     public void update() {

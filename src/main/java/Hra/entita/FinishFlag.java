@@ -3,20 +3,18 @@ package Hra.entita;
 import javax.swing.*;
 import java.awt.*;
 
-public class FinishFlag {
-    int x, y, width, height;
+public class FinishFlag extends Entita {
+
 
 
     Image Flag = new ImageIcon(getClass().getResource("/finish_flag.png")).getImage();
 
     public FinishFlag(int x, int y, int width, int height) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+        super(x, y, width, height, true);
+
     }
 
     public void draw(Graphics g) {
-        g.drawImage(Flag, x, y, width, height, null);
+        g.drawImage(Flag, getX(), getY(), getWidth(), getHeight(), null);
     }
 }
