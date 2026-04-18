@@ -16,7 +16,7 @@ public class CoinScore {
     public void draw(Graphics2D g2, Player player) {
         g2.setFont(customFont);
 
-        String text = "COINS COLLECTED : " + player.getCoinsCollected();
+        String text = "COINS COLLECTED : " + player.getCoinsCollected() + "/10";
 
 
 

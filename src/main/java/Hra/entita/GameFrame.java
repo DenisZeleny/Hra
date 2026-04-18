@@ -47,7 +47,7 @@ public class GameFrame extends JPanel {
             return;
         }
 
-        if (player.getX() > 9200) {
+        if (player.getX() > 9140) {
             endGame("LEVEL COMPLETE!", player.getCoinsCollected());
             return;
         }
