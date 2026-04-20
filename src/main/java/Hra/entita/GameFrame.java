@@ -68,7 +68,7 @@ private void endGame(String message, int coins) {
 
     if (menuPanel != null) {
 
-        menuPanel.nastavKonec(message, coins);
+        menuPanel.setEnd(message, coins);
     }
     timer.stop();
     if (onWin != null) onWin.run();

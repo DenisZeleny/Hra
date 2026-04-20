@@ -14,15 +14,15 @@ public class MenuPanel extends JPanel {
 
     private int width = 1200;
     private int height = 900;
-    private String statusText = "";
-    private int ziskaneMince = -1;
+    private String endText = "";
+    private int coinsGot = -1;
     private Font customFont2;
     private Font customFont1;
     private Font customFont3;
 
-    public void nastavKonec(String text, int coins) {
-        this.statusText = text;
-        this.ziskaneMince = coins;
+    public void setEnd(String text, int coins) {
+        this.endText = text;
+        this.coinsGot = coins;
         repaint();
     }
 
@@ -94,23 +94,23 @@ public class MenuPanel extends JPanel {
         g.drawString("MOVEMENT:",920,500);
 
 
-        if (!statusText.isEmpty()) {
-            if (statusText.contains("DIED")) {
+        if (!endText.isEmpty()) {
+            if (endText.contains("DIED")) {
                 g.setFont(customFont3);
                 g.setColor(Color.RED);
-                g.drawString(statusText, 450, 650);
+                g.drawString(endText, 450, 650);
             } else {
                 g.setFont(customFont3);
                 g.setColor(Color.GREEN);
-                g.drawString(statusText, 335, 650);
+                g.drawString(endText, 335, 650);
 
             }
 
-        if (ziskaneMince >= 0) {
+        if (coinsGot >= 0) {
             g.setFont(customFont2);
             g.setColor(Color.YELLOW);
 
-            g.drawString("COINS COLLECTED: " + ziskaneMince + "/10", 377, 353);
+            g.drawString("COINS COLLECTED: " + coinsGot + "/10", 377, 353);
 
         }
         }
