@@ -21,7 +21,6 @@ public class Game extends JFrame {
         layout = new CardLayout();
         container = new JPanel(layout);
 
-        // Vytvoření menu a předání akce pro start
         this.menuPanel = new MenuPanel(() -> {
             startGame();
         });
@@ -33,7 +32,6 @@ public class Game extends JFrame {
     }
 
     private void startGame() {
-        // Teď posíláme 'menuPanel' jako druhý parametr
         GameFrame gameFrame = new GameFrame(() -> {
             layout.show(container, CARD_MENU);
             container.remove(container.getComponent(1)); // Odstraní starou hru

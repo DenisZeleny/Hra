@@ -3,10 +3,11 @@ package Hra.entita;
 import java.awt.*;
 
 public class Entita {
-    private int x, y, width, height;
+    protected double x, y;
+    private int  width, height;
     private boolean isAlive;
 
-    public Entita(int x, int y, int width, int height, boolean isAlive) {
+    public Entita(double x, double y, int width, int height, boolean isAlive) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -17,13 +18,13 @@ public class Entita {
 
     public void draw(Graphics g){}
 
-    public Rectangle getBounds() {return new Rectangle(x, y, width, height);}
+    public Rectangle getBounds() {return new Rectangle((int)x, (int)y, width, height);}
 
-    public int getX() {return x;}
+    public int getX() {return (int) x;}
 
     public void setX(int x) {this.x = x;}
 
-    public int getY() {return y;}
+    public int getY() {return (int) y;}
 
     public void setY(int y) {this.y = y;}
 

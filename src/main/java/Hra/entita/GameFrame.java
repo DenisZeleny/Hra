@@ -11,7 +11,7 @@ public class GameFrame extends JPanel {
     private final KeyInput keyInput = new KeyInput();
 
     Player player = new Player(300, 300, 64, 64, true);
-    BackGround backGround = new BackGround(0, 0, 10000, 900);
+    BackGround backGround = new BackGround(-500,0, 20000, 900);
     TileSet tileSet = new TileSet();
     MapaManager mapManager = new MapaManager();
     CoinScore coinScore = new CoinScore();
@@ -59,6 +59,7 @@ public class GameFrame extends JPanel {
         camera = player.getX() + player.getWidth() / 2 - getWidth() / 2;
         if (camera < 0) camera = 0;
 
+        backGround.moveBackground(1.5, keyInput.isKeyPressed(65), keyInput.isKeyPressed(68));
         tileSet.update();
     }
 
