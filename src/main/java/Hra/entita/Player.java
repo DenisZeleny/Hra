@@ -107,10 +107,8 @@ public class Player extends Entita {
         int zdrojY2 = zdrojY1 + vyskaJedne;
 
 
-        g.drawImage(Panak,
-                getX(), getY(), getX() + getWidth(), getY() + getHeight(),
-                zdrojX1, zdrojY1, zdrojX2, zdrojY2,
-                null);
+        g.drawImage(Panak, getX(), getY(), getX() + getWidth(), getY() + getHeight(),
+                zdrojX1, zdrojY1, zdrojX2, zdrojY2, null);
     }
 
 }

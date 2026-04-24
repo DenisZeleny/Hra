@@ -10,7 +10,7 @@ public class GameFrame extends JPanel {
     private static final int TIMER_DELAY_MS = 16;
     private final KeyInput keyInput = new KeyInput();
 
-    Player player = new Player(300, 300, 64, 64, true);
+    Player player = new Player(200, 323, 64, 64, true);
     BackGround backGround = new BackGround(-500,0, 20000, 900);
     TileSet tileSet = new TileSet();
     MapaManager mapManager = new MapaManager();
@@ -60,6 +60,7 @@ public class GameFrame extends JPanel {
         if (camera < 0) camera = 0;
 
         backGround.moveBackground(1.5, keyInput.isKeyPressed(65), keyInput.isKeyPressed(68));
+
         tileSet.update();
     }
 
