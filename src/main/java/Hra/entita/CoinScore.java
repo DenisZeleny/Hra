@@ -13,15 +13,15 @@ public class CoinScore {
         } catch (Exception e) {}
     }
 
-    public void draw(Graphics2D g2, Player player) {
-        g2.setFont(customFont);
+    public void draw(Graphics g, Player player) {
+        g.setFont(customFont);
 
         String text = "COINS COLLECTED : " + player.getCoinsCollected() + "/10";
 
 
 
-        g2.setColor(Color.YELLOW);
-        g2.drawString(text, 20, 40);
+        g.setColor(Color.YELLOW);
+        g.drawString(text, 20, 40);
 
     }
 }

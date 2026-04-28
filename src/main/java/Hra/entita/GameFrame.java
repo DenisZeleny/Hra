@@ -80,20 +80,19 @@ private void endGame(String message, int coins) {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        Graphics2D g2 = (Graphics2D) g;
 
 
-        g2.translate(-camera, 0);
+        g.translate(-camera, 0);
 
-        backGround.draw(g2);
-        tileSet.drawTile(g2, mapManager);
-        player.draw(g2);
-        finishFlag.draw(g2);
+        backGround.draw(g);
+        tileSet.drawTile(g, mapManager);
+        player.draw(g);
+        finishFlag.draw(g);
 
 
 
-        g2.translate(camera, 0);
-        coinScore.draw(g2, player);
+        g.translate(camera, 0);
+        coinScore.draw(g, player);
 
 
 
