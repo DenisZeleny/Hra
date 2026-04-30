@@ -10,12 +10,15 @@ public class GameFrame extends JPanel {
     private static final int TIMER_DELAY_MS = 16;
     private final KeyInput keyInput = new KeyInput();
 
+
+    private int currentLevel = 1;
     Player player = new Player(200, 323, 64, 64, true);
     BackGround backGround = new BackGround(-500,0, 20000, 900);
     TileSet tileSet = new TileSet();
     MapaManager mapManager = new MapaManager();
-    CoinScore coinScore = new CoinScore();
+    Score score = new Score();
     FinishFlag finishFlag = new FinishFlag(9000, 323,256,256);
+
     private Runnable onWin;
     private Timer timer;
     private int camera = 0;
@@ -29,8 +32,6 @@ public class GameFrame extends JPanel {
         setFocusTraversalKeysEnabled(false);
         addKeyListener(keyInput);
 
-
-        mapManager.loadMapData(tileSet.mapa);
 
         timer = new Timer(TIMER_DELAY_MS, e -> {
             updateGame();
@@ -48,8 +49,11 @@ public class GameFrame extends JPanel {
         }
 
         if (player.getX() > 9140) {
-            endGame("LEVEL COMPLETE!", player.getCoinsCollected());
-            return;
+            if (currentLevel == 2) {
+                endGame("SVARTA COMPLETE!", player.getBeersCollected());
+            } else {
+                endGame("LEVEL COMPLETE!", player.getCoinsCollected());
+            }
         }
         if (player.getY() > 1200) {
             endGame("YOU DIED!", -1);
@@ -62,25 +66,43 @@ public class GameFrame extends JPanel {
         backGround.moveBackground(1.5, keyInput.isKeyPressed(65), keyInput.isKeyPressed(68));
 
         tileSet.update();
+
     }
+    public void startLevel(int levelNumber) {
+        this.currentLevel = levelNumber;
 
+        int[][] map = LevelData.getLevel(levelNumber);
 
+        tileSet.loadTheme(levelNumber);
+        tileSet.setMap(map);
+
+        if (levelNumber == 1) {
+            backGround.setBackground("/background.png");
+        }
+        if (levelNumber == 2) {
+            backGround.setBackground("/background2.png");
+        }
+
+        mapManager.loadMapData(map);
+        player.setX(200);
+        player.setY(323);
+    }
 
 private void endGame(String message, int coins) {
 
     if (menuPanel != null) {
 
-        menuPanel.setEnd(message, coins);
+        menuPanel.setEnd(message, coins, this.currentLevel);
     }
     timer.stop();
     if (onWin != null) onWin.run();
 }
 
+
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
-
 
         g.translate(-camera, 0);
 
@@ -89,13 +111,9 @@ private void endGame(String message, int coins) {
         player.draw(g);
         finishFlag.draw(g);
 
-
-
         g.translate(camera, 0);
-        coinScore.draw(g, player);
 
-
-
+        score.draw(g, player, currentLevel);
     }
 
 

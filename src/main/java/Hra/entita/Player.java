@@ -8,8 +8,8 @@ import java.awt.event.KeyEvent;
 
 public class Player extends Entita {
     private int coinsCollected = 0;
-
-    Image Panak = new ImageIcon(getClass().getResource("/guy.png")).getImage();
+    private int beersCollected = 0;
+    private int movementSpeed = 4;
 
     int frameX = 0;
     int frameY = 0;
@@ -17,13 +17,20 @@ public class Player extends Entita {
     int JumpLenght = 0;
     boolean jump = false;
 
+    Image Panak = new ImageIcon(getClass().getResource("/character.png")).getImage();
+
 
     public Player(int x, int y, int width, int height, boolean isAlive) {
         super(x, y, width, height, isAlive);
     }
 
     public void addCoin() {coinsCollected++;}
+    public void addBeer() {beersCollected++;}
     public int getCoinsCollected() { return coinsCollected; }
+    public int getBeersCollected() { return beersCollected; }
+    public void boostSpeed(int amount) {
+        this.movementSpeed += amount;
+    }
 
     public void move() {
         frameDelay++;
@@ -42,14 +49,14 @@ public class Player extends Entita {
 
 
         if (keys.isKeyPressed(KeyEvent.VK_D)) {
-            setX(getX() + 4);
+            setX(getX() + movementSpeed);
             if (checkCollision(mm.grass)) setX(oldX);
             frameY = 1;
             move();
         }
 
         else if (keys.isKeyPressed(KeyEvent.VK_A)) {
-            setX(getX() - 4);
+            setX(getX() - movementSpeed);
             if (checkCollision(mm.grass)) setX(oldX);
             frameY = 2;
             move();

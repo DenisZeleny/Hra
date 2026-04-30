@@ -7,6 +7,8 @@ public class MapaManager {
     public ArrayList<Rectangle> grass = new ArrayList<>();
     public ArrayList<Rectangle> spikes = new ArrayList<>();
     public ArrayList<Rectangle> coins = new ArrayList<>();
+    public ArrayList<Rectangle> beers = new ArrayList<>();
+
 
     private final int TILE_SIZE = 64;
 
@@ -15,18 +17,21 @@ public class MapaManager {
         grass.clear();
         spikes.clear();
         coins.clear();
-
-        for (int row = 0; row < mapa.length; row++) {
-            for (int col = 0; col < mapa[row].length; col++) {
-                int tileId = mapa[row][col];
+        beers.clear();
 
 
-                Rectangle hitBox = new Rectangle(col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+        for (int i = 0; i < mapa.length; i++) {
+            for (int j = 0; j < mapa[i].length; j++) {
+                int tileId = mapa[i][j];
+
+
+                Rectangle hitBox = new Rectangle(j * TILE_SIZE, i * TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
                 switch (tileId) {
                     case 1, 2 -> grass.add(hitBox);
                     case 3 -> spikes.add(hitBox);
                     case 4 -> coins.add(hitBox);
+                    case 5 -> beers.add(hitBox);
                 }
             }
         }
@@ -36,6 +41,14 @@ public class MapaManager {
             if (player.getBounds().intersects(coins.get(i))) {
                 coins.remove(i);
                 player.addCoin();
+                break;
+            }
+        }
+        for (int i = 0; i < beers.size(); i++) {
+            if (player.getBounds().intersects(beers.get(i))) {
+                beers.remove(i);
+                player.addBeer();
+                player.boostSpeed(1);
                 break;
             }
         }

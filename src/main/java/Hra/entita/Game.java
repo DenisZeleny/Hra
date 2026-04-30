@@ -21,8 +21,8 @@ public class Game extends JFrame {
         layout = new CardLayout();
         container = new JPanel(layout);
 
-        this.menuPanel = new MenuPanel(() -> {
-            startGame();
+        this.menuPanel = new MenuPanel((level) -> {
+            startGame(level);
         });
 
         container.add(menuPanel, CARD_MENU);
@@ -31,15 +31,18 @@ public class Game extends JFrame {
         layout.show(container, CARD_MENU);
     }
 
-    private void startGame() {
+    private void startGame(int level) {
+
         GameFrame gameFrame = new GameFrame(() -> {
             layout.show(container, CARD_MENU);
-            container.remove(container.getComponent(1)); // Odstraní starou hru
         }, menuPanel);
 
         container.add(gameFrame, CARD_GAME);
         layout.show(container, CARD_GAME);
+
         gameFrame.requestFocusInWindow();
+
+        gameFrame.startLevel(level);
         gameFrame.startGame();
     }
 

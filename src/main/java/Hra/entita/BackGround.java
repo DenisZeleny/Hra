@@ -3,13 +3,17 @@ package Hra.entita;
 import javax.swing.*;
 import java.awt.*;
 
-public class BackGround extends Entita{
+public class BackGround extends Entita {
 
-    Image backGround = new ImageIcon(getClass().getResource("/background.png")).getImage();
+    private Image backGround;
+
+
 
 
     public BackGround(int x, int y, int width, int height) {
         super(x, y, width, height, true);
+
+        this.backGround = new ImageIcon(getClass().getResource("/background.png")).getImage();
 
     }
 
@@ -28,4 +32,11 @@ public class BackGround extends Entita{
     public void draw(Graphics g) {
         g.drawImage(backGround,getX(),getY(),getWidth(),getHeight(),null);
     }
+
+    public void setBackground(String path) {
+        try {
+            this.backGround = new ImageIcon(getClass().getResource(path)).getImage();
+        } catch (Exception e) {}
+    }
 }
+
