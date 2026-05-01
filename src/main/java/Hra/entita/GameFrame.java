@@ -55,10 +55,18 @@ public class GameFrame extends JPanel {
                 endGame("LEVEL COMPLETE!", player.getCoinsCollected());
             }
         }
+
+        if (currentLevel == 2) {
+            if (player.getY() > 740) {
+                endGame("YOU DIED!", -1);
+                return;
+            }
+        }
         if (player.getY() > 1200) {
             endGame("YOU DIED!", -1);
             return;
         }
+
 
         camera = player.getX() + player.getWidth() / 2 - getWidth() / 2;
         if (camera < 0) camera = 0;

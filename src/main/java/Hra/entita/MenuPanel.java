@@ -120,12 +120,14 @@ public class MenuPanel extends JPanel {
                 if (this.currentLevel == 2) {
                     g.setColor(Color.ORANGE);
                     text = "BEERS COLLECTED: ";
+                    g.drawString(text + coinsGot + "/6", 377, 283);
                 } else {
                     g.setColor(Color.YELLOW);
                     text = "COINS COLLECTED: ";
+                    g.drawString(text + coinsGot + "/10", 377, 283);
                 }
 
-                g.drawString(text + coinsGot + "/10", 377, 283);
+
             }
         }
     }

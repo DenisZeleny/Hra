@@ -24,10 +24,22 @@ public class Player extends Entita {
         super(x, y, width, height, isAlive);
     }
 
-    public void addCoin() {coinsCollected++;}
-    public void addBeer() {beersCollected++;}
-    public int getCoinsCollected() { return coinsCollected; }
-    public int getBeersCollected() { return beersCollected; }
+    public void addCoin() {
+        coinsCollected++;
+    }
+
+    public void addBeer() {
+        beersCollected++;
+    }
+
+    public int getCoinsCollected() {
+        return coinsCollected;
+    }
+
+    public int getBeersCollected() {
+        return beersCollected;
+    }
+
     public void boostSpeed(int amount) {
         this.movementSpeed += amount;
     }
